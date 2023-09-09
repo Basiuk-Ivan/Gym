@@ -6,6 +6,7 @@ import ExerciseCard from './ExerciseCard';
 
 import RightArrowIcon from '../assets/icons/right-arrow.png';
 import LeftArrowIcon from '../assets/icons/left-arrow.png';
+import { useStateContext } from '../context/ContextProveder';
 
 const LeftArrow = () => {
   const { scrollPrev } = useContext(VisibilityContext);
@@ -27,13 +28,15 @@ const RightArrow = () => {
   );
 };
 
-const HorizontalScrollbar = ({ data, bodyPart, setBodyPart, isBodyParts }) => {
+const HorizontalScrollbar = ({ data, isBodyParts }) => {
+  const { bodyPart, setBodyPart } = useStateContext();
+
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
       {data.map(item => (
         <Box
           key={item.id || item}
-          // itemId={item.id || item}
+          itemId={item.id || item}
           title={item.id || item}
           m="0 40px"
         >
