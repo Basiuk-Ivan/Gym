@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Stack } from '@mui/material';
 
 import Logo from '../assets/images/Logo.png';
@@ -15,33 +15,45 @@ const Navbar = () => (
     }}
     px="20px"
   >
-    <Link to="/">
+    <NavLink to="/">
       <img
         src={Logo}
         alt="logo"
         style={{ width: '48px', height: '48px', margin: '0px 20px' }}
       />
-    </Link>
+    </NavLink>
     <Stack
+      id="sidebar"
       direction="row"
       gap="40px"
       fontFamily="Alegreya"
       fontSize="24px"
       alignItems="flex-end"
     >
-      <Link
+      <NavLink
         to="/"
+        className={({ isActive, isPending }) =>
+          isPending ? 'pending' : isActive ? 'active' : ''
+        }
         style={{
           textDecoration: 'none',
           color: '#3A1212',
-          borderBottom: '3px solid #FF2625',
         }}
       >
         Home
-      </Link>
-      <a href="#exercises" style={{ textDecoration: 'none', color: '#3A1212' }}>
+      </NavLink>
+      <NavLink
+        to="/exercise"
+        className={({ isActive, isPending }) =>
+          isPending ? 'pending' : isActive ? 'active' : ''
+        }
+        style={{
+          textDecoration: 'none',
+          color: '#3A1212',
+        }}
+      >
         Exercises
-      </a>
+      </NavLink>
     </Stack>
   </Stack>
 );

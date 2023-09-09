@@ -59,6 +59,7 @@ body {
   width: 700px;
   height: 900px;
   margin-top: -330px;
+  border-radius: 0px 0px 0px 70px;
 }
 
 .exercise-card {
@@ -137,4 +138,8 @@ body {
   .exercise-card {
     width: 280px;
   }
+}
+
+#sidebar a.active {
+  border-bottom: 3px solid #ff2625;
 }

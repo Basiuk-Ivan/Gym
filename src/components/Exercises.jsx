@@ -4,24 +4,10 @@ import { Box, Stack, Typography } from '@mui/material';
 
 import { fetchData, exerciseOptions } from '../utils/fetchData';
 import ExerciseCard from './ExerciseCard';
+import { useStateContext } from '../context/ContextProveder';
 
-const Exercises = ({ bodyPart, exercises, setExercises }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const exercisesPerPage = 9;
-
-  const indexOfLastExercise = currentPage * exercisesPerPage;
-
-  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
-
-  const currentExercises = exercises.slice(
-    indexOfFirstExercise,
-    indexOfLastExercise
-  );
-
-  const paginate = (e, value) => {
-    setCurrentPage(value);
-    window.scroll({ top: '1800', behavior: 'smooth' });
-  };
+const Exercises = () => {
+  const { bodyPart, exercises, setExercises } = useStateContext();
 
   useEffect(() => {
     const fetchExercisesData = async () => {
@@ -40,7 +26,24 @@ const Exercises = ({ bodyPart, exercises, setExercises }) => {
       setExercises(exercisesData);
     };
     fetchExercisesData();
-  }, [bodyPart]);
+  }, []);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const exercisesPerPage = 9;
+
+  const indexOfLastExercise = currentPage * exercisesPerPage;
+
+  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
+
+  const currentExercises = exercises.slice(
+    indexOfFirstExercise,
+    indexOfLastExercise
+  );
+
+  const paginate = (e, value) => {
+    setCurrentPage(value);
+    window.scroll({ top: '1800', behavior: 'smooth' });
+  };
 
   return (
     <Box id="exercises" mt="50px" p="20px" sx={{ mt: { lg: '110px' } }}>
